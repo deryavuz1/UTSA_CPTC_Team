@@ -29,12 +29,19 @@ Example File Hierarchy:
 # INSTALLATION
 
 ## WINDOWS (Tested on Windows 10)
+
+- Install from [the web browser.](https://obsidian.md/download).
 - Make a folder `obsidian_vault`
 - Properties > Sharing > `Everyone` > Enter your credentials
 - Point your Obsidian vault into the shared folder.
 
 ## LINUX (Tested on Kali Linux)
+
+- Install the .deb package from [the web browser.](https://obsidian.md/download).
+- `sudo apt install -f ./obsidian_deb`
+
 ### On the server to Obsidian centrally (only on one system):
+
 ```
 sudo mkdir -p /srv/obsidian-vault
 sudo chown -R nobody:nogroup /srv/obsidian-vault
