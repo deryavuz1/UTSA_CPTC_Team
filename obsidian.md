@@ -1,16 +1,39 @@
 ## Setting up Obsidian for note taking
 
-Install Obsidian for the OS you are working on.
+- Install Obsidian for the OS you are working on.
+- ENSURE TO UTILIZE DIFFERENT FILES PER SCANNED MACHINE OR ENVIRONMENT. DO NOT WORK ON THE SAME FILES AS MUCH AS YOU CAN.
+
+Example File Hierarchy:
+```
+- <VNET_1>
+    - NMAP Scans
+    - TODO
+    - <HOSTNAME_Testing>
+    - Testing Notes and Methodology
+    - Findings
+- <VNET_2>
+    - NMAP Scans
+    - TODO
+    - <HOSTNAME_Testing>
+    - Testing Notes and Methodology
+    - Findings
+- <VNET_3>
+    - NMAP Scans
+    - TODO
+    - <HOSTNAME_Testing>
+    - Testing Notes and Methodology
+    - Findings
+```
+
 
 # INSTALLATION
 
-## WINDOWS
+## WINDOWS (Tested on Windows 10)
 - Make a folder `obsidian_vault`
 - Properties > Sharing > `Everyone` > Enter your credentials
 - Point your Obsidian vault into the shared folder.
 
-
-## LINUX
+## LINUX (Tested on Kali Linux)
 ### On the server to Obsidian centrally (only on one system):
 ```
 sudo mkdir -p /srv/obsidian-vault
@@ -27,7 +50,7 @@ sudo systemctl restart smbd
    path = /srv/obsidian-vault
    browseable = yes
    writable = yes
-   guest ok = no
+   guest ok = yes
    create mask = 0777
    directory mask = 0777
    oplocks = no
@@ -36,14 +59,30 @@ sudo systemctl restart smbd
 
 # MOUNTING
 ### Mount from Linux:
+
 ```
 mkdir -p ~/obsidian
-mount -t cifs //server-ip/obsidian ~/obsidian -o username=youruser,password=yourpass,vers=3.0
+mount -t cifs //server-ip/obsidian ~/obsidian, vers=3.0
 ```
 
 ### Mount from Windows:
+
 - PowerShell (PS):
 ```
 New-PSDrive -Name "O" -PSProvider FileSystem -Root "\\server-ip\obsidian" -Persist -Credential (Get-Credential)
 ```
-- Throuh Network Discovery, identify the share and work through that vault folder on your end.
+- Through Network Discovery, identify the workstation hosting the share, connect to it and work through that vault folder on your end. Files should automatically sync.
+
+
+### Compress to OneDrive or other shares
+
+```
+# Linux
+zip -r obsidian_team_backup.zip ./
+
+# Windows CMD
+tar.exe -xf archive.zip
+
+# Windows PowerShell
+Compress-Archive \obsidian obsidian_team_backup.zip
+```
