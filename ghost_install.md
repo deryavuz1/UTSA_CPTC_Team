@@ -7,27 +7,51 @@
     `sudo ssh -N -L 80:localhost:80 <user>@<IP_OF_GHOSTWRITER_MACHINE>`
 
 
+# Installation
 
-read -p "This script is only for a singular machine to run Ghostwriter on - ensure that you've run the \"setup-script.sh\" before running this script. Other machines will access the Ghostwriter  interface on this through port forwarding to collaborate."
+On your machine that will host Ghostwriter (make sure there is enough STORAGE):
 
+```
 sudo apt install -y \
 	docker.io \
 	docker-compose \
 	openjdk-11-jdk
+```
 
-# Ghostwriter
-echo -e "\n[*] Installing Ghostwriter..."
-mkdir -p ~/tools/Ghostwriter/
-git clone https://github.com/GhostManager/Ghostwriter.git ~/tools/ghostwriter-cli-linux
-sudo ~/tools/Ghostwriter/ghostwriter-cli-linux install
+Install Ghostwriter:
 
-echo -e '\nGhostwriter is ready!\n'
-tmp=$(~/tools/Ghostwriter/ghostwriter-cli-linux config get admin_password)
-passwd=$(echo $tmp | cut -d" " -f10)
-echo -e "Credentials:\nUsername: admin\nPassword: $passwd"
-echo -e "\nGive your team this command to access Ghostwriter remotely:\nsudo ssh -N -L 80:localhost:80 user@<IP>"
-echo -e "\nGhostwriter will be hosted at https://localhost/"
+```
+mkdir ~/tools/ && cd ~/tools/
+git clone https://github.com/GhostManager/Ghostwriter.git 
+sudo ./tools/Ghostwriter/ghostwriter-cli-linux install
 
-echo -e "\n[*] Installing Sublime text..."
-wget https://download.sublimetext.com/sublime-text_build-3211_amd64.deb
-sudo dpkg -i sublime-text_build-3211_amd64.deb
+# Get the admin password
+tools/Ghostwriter/ghostwriter-cli-linux config get admin_password
+
+# Ghostwriter now should run on https://localhost.
+```
+
+If you need to EXPLICITLY allow hosts to connect:
+```
+./ghostwriter-cli-linux config allowhost <YOUR DOMAIN NAME OR IP>
+./ghostwriter-cli-linux containers down
+./ghostwriter-cli-linux containers up
+```
+
+To change the admin password (do not unless you need to), first delete the docker volumes associated with Ghostwriter.
+```
+docker volumes
+docker volume rm <insert_name>
+```
+Then, change the password and restart Ghostwriter containers:
+
+```
+./ghostwriter-cli-linux config set admin_password <insert_password>
+./ghostwriter-cli-linux down
+./ghostwriter-cli-linux up
+```
+
+Ghostwriter will be hosted at `https://localhost/` from the central machine.
+
+Give your team this command to access Ghostwriter remotely:
+`sudo ssh -N -L 80:localhost:80 user@<IP>`
