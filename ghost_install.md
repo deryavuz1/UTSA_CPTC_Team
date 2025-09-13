@@ -23,10 +23,10 @@ Install Ghostwriter:
 ```
 mkdir ~/tools/ && cd ~/tools/
 git clone https://github.com/GhostManager/Ghostwriter.git 
-sudo ./tools/Ghostwriter/ghostwriter-cli-linux install
+sudo ~/tools/Ghostwriter/ghostwriter-cli-linux install
 
 # Get the admin password
-tools/Ghostwriter/ghostwriter-cli-linux config get admin_password
+~/tools/Ghostwriter/ghostwriter-cli-linux config get admin_password
 
 # Ghostwriter now should run on https://localhost.
 ```
