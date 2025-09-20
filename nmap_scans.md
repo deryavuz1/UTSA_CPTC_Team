@@ -19,5 +19,31 @@ Ensure to exclude the OT subnet by creating an `exclude_ot.txt` file.
 
 With the live IPs identified, run service AND port scans and save output. COPY and PASTE the scan output with open ports and services into the OBSIDIAN NOTES | GOOGLE DOC with filename format: `<IP>.nmap`
 
-`nmap -iL live_hosts_<subnet>.txt -p- -sV -T4 -oN detailed_scan_<subnet>.txt`
+`nmap -iL live_hosts_<subnet>.txt -p- -sV -T4 -oN detailed_scan_<subnet>`
+
+### Version and Vulnerability Checks
+
+In addition to automatic checks, manually search service and OS version numbers.
+
+`nmap -sV --script=vuln,vulners -p <ports> <target>`
+`searchsploit "<Product> <version>"`
+
+### UDP Scans
+
+Run these to make sure we are not missing any protocols (top ports mainly):
+
+`sudo nmap -sU --top-ports 100 -T4 -v -iL <live_hosts> -oN nmap_udp_<subnet>`
+
+
+### Web Screenshotting Tools
+
+Using tools like `aquatone` or `EyeWitness` it can be very easy to compile web screenshots and try out default credentials in an automated way. Once you have a list of web ports/IPs that can be extracted from `nmap` output, consider feeding them into a screenshotting tool to get a report:
+
+EyeWitness:
+`sudo ./EyeWitness.py -x /path/to/nmap.xml --web ---threads 10 --timeout 30 --headless -d /path/to/screens`
+
+
+
+
+
 
