@@ -25,14 +25,14 @@ Example File Hierarchy:
     - Findings
 ```
 
-
-# INSTALLATION
+# INSTALLATION (for centralized server)
 
 ## WINDOWS (Tested on Windows 10)
 
 - Install from [the web browser.](https://obsidian.md/download).
 - Make a folder `obsidian_vault`
 - Properties > Sharing > `Everyone` > Enter your credentials
+- Create a network location with it as well. 
 - Point your Obsidian vault into the shared folder.
 
 ## LINUX (Tested on Kali Linux)
@@ -78,7 +78,9 @@ mount -t cifs //server-ip/obsidian ~/obsidian, vers=3.0
 ```
 New-PSDrive -Name "O" -PSProvider FileSystem -Root "\\server-ip\obsidian" -Persist -Credential (Get-Credential)
 ```
-- Through Network Discovery, identify the workstation hosting the share, connect to it and work through that vault folder on your end. Files should automatically sync.
+- Through Network Discovery, identify the workstation hosting the share, connect to it.
+- Install the Obsidian application and import the vault that is in the shared drive. 
+- Work through that vault folder on your end, using. Files should automatically sync. 
 
 
 ### Compress to OneDrive or other shares

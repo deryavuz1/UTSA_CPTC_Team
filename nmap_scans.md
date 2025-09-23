@@ -6,7 +6,7 @@ DO NOT SCAN ANY OT NETWORK IPs, TRIPLE CHECK TO ENSURE THE RANGES DO NOT INCLUDE
 
 ### Ping Sweep
 
-Ensure to exclude the OT subnet by creating an `exclude_ot.txt` file.
+Ensure to exclude the OT subnet by creating an `exclude_ot.txt` file. DO NOT SCAN THE OT SUBNET WITH THESE COMMANDS.
 
 Put the live IPs into a list OR use the subnet itself:
 
