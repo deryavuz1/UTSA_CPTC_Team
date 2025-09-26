@@ -10,7 +10,7 @@
 read -p "Please run this script using the bash command, inside the context of the bash shell. Enter \"/bin/bash\", then execute the script with \"bash setup-script.sh\""
 
 # The basics
-sudo apt install tmux -y
+sudo apt install terminator -y # MAKE SURE TO COLOR CONFIG THIS
 
 # tmux + zsh config changes
 echo "export HISTSIZE=100000" >> ~/.bashrc
